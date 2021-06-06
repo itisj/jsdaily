@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sketch.js Daily</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+<link rel="icon" href="img/js.png" sizes="16x16">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+html {
+    font-family: 'Gloria Hallelujah', cursive;
+    background-color: #cccccc;
+}
+
+.header {
+  background-color: #CCCCCC;
+  color: #000;
+  padding: 15px;
+}
+
+/*
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 8px;
+  margin-bottom: 7px;
+  background-color: #33b5e5;
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.menu li:hover {
+  background-color: #0099cc;
+}
+*/
+
+.aside {
+  background-color: #555;
+  padding: 0px;
+  color: #ffffff;
+  text-align: left;
+  font-size: 0px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.12), 0 5px 15px rgba(0,0,0,0.24);
+}
+
+.aside2 {
+  background-color: #e8e8e8;
+  padding: 16px;
+  color: #454545;
+  text-align: left;
+  font-size: 8px;
+} 
+
+.footer {
+  background-color: #cccccc;
+  color: #333;
+  text-align: center;
+  font-size: 12px;
+  padding: 16px;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* --For mobile phones:-- */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+    
+    
+/*
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 30%;
+  border: none;
+}
+*/
+ 
+    
+.fill {object-fit: fill;}
+.contain {object-fit: contain;}
+.cover {object-fit: cover;}
+.scale-down {object-fit: scale-down;}
+.none {object-fit: none;}
+
+
+
+/* hover on launch effect */
+    
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.image {
+  opacity: 1;
+  filter: grayscale(100%);
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .3s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  opacity: 0.3;
+  float: right;
+  display: block;
+  transition: .3s ease;
+}
+
+.aside:hover .image {
+  opacity: 1;
+  transform: scale(1.03);
+  -ms-transform: scale(1.03); /* IE 9 */
+  -webkit-transform: scale(1.03); /* Safari 3-8 */
+  filter: grayscale(0%);
+}
+
+.aside:hover .middle {
+  opacity: 1;
+}
+  
+
+</style>
+</head>
+
+    
+<body>
+
+<!-- header -->
+<div class="header">
+<div class="row">
+    <div class="col-9 col-s-12">
+        <h1>Sketch. js Daily</h1>
+        <p style="font-size: 16px;">All these sketches are made using p5.js, and each one has its own unique name.<br>
+            I found that only by staring at them is satisfying enough.</p>
+    </div>
+</div>
+</div>
+ 
+<!-- main -->
+<div class="row">
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+<!--
+        <h2 style="font-family: 'Roboto Mono', monospace;font-size: 12px ">
+
+var angle = 0.0;<br>
+var offset = 290;<br>
+var scalar = 150;<br>
+var speed = 0.006;<br><br>
+
+function setup() {<br>
+  createCanvas(600, 600);<br>
+  background(46);<br>
+}<br><br>
+
+function draw() {<br>
+    var x = offset + cos(angle) * scalar;<br>
+    var y = offset + sin(angle) * scalar;<br><br>
+  
+  let c = color(x*y+x, x*sin(y/600), y/2*sin(x/220));<br>
+  fill(c);<br>
+  noStroke(255);<br>
+  ellipse(x, y, x*y/(50+x), y*x/(80+y));<br>
+  angle += speed;<br>
+
+}<br>
+
+
+        </h2>
+-->
+        <h2>
+            Day 1<br>cozy dount
+        </h2>
+        </div>
+        <div class="aside">
+            <a href="Day1.html" target="_blank">
+                <img src="img/Day1.PNG" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 2<br>smooth lines</h2>
+        </div>
+        <div class="aside">
+            <a href="Day2.html" target="_blank">
+                <img src="img/Day2.PNG" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 3<br>Seurat get bored</h2>
+        </div>
+        <div class="aside">
+            <a href="Day3.html" target="_blank">
+                <img src="img/Day3.PNG" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 4<br>Orthogonality</h2>
+        </div>
+        <div class="aside">
+            <a href="Day4.html" target="_blank">
+                <img src="img/Day4.PNG" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    
+</div>
+
+
+<div class="row">
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 5<br>ocean</h2>
+        </div>
+        <div class="aside">
+            <a href="Day5.html" target="_blank">
+                <img src="img/Day5.PNG" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 6<br>I'm cycle</h2>
+        </div>
+        <div class="aside">
+            <a href="Day6.html" target="_blank">
+                <img src="img/Day6.PNG" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 7<br>not cubes</h2>
+        </div>
+        <div class="aside">
+            <a href="Day7.html" target="_blank">
+                <img src="img/Day7.PNG" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 8<br>cross lines</h2>
+        </div>
+        <div class="aside">
+            <a href="Day8.html" target="_blank">
+                <img src="img/Day8.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+
+</div>
+    
+    
+<div class="row">
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 9<br>Rehoboam</h2>
+        </div>
+        <div class="aside">
+            <a href="Day9.html" target="_blank">
+                <img src="img/Day9.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 10<br>snowing</h2>
+        </div>
+        <div class="aside">
+            <a href="Day10.html" target="_blank">
+                <img src="img/Day10.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 11<br>where's light</h2>
+        </div>
+        <div class="aside">
+            <a href="Day11.html" target="_blank">
+                <img src="img/Day11.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 12<br>bobo</h2>
+        </div>
+        <div class="aside">
+            <a href="Day12.html" target="_blank">
+                <img src="img/Day12.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+
+</div>
+    
+
+<div class="row">
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 13<br>Force Filed</h2>
+        </div>
+        <div class="aside">
+            <a href="Day13.html" target="_blank">
+                <img src="img/Day13.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 14<br>Cube Wave</h2>
+        </div>
+        <div class="aside">
+            <a href="Day14.html" target="_blank">
+                <img src="img/Day14.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 15<br>Noise</h2>
+        </div>
+        <div class="aside">
+            <a href="Day15.html" target="_blank">
+                <img src="img/Day15.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 16<br>Go Right</h2>
+        </div>
+        <div class="aside">
+            <a href="Day16.html" target="_blank">
+                <img src="img/Day16.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+
+</div>
+
+
+
+<div class="row">
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 17<br>Just Draw</h2>
+        </div>
+        <div class="aside">
+            <a href="Day17.html" target="_blank">
+                <img src="img/Day17.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 18<br>Two_PI</h2>
+        </div>
+        <div class="aside">
+            <a href="Day18.html" target="_blank">
+                <img src="img/Day18.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 19<br>PI_apple</h2>
+        </div>
+        <div class="aside">
+            <a href="Day19.html" target="_blank">
+                <img src="img/Day19.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+    <div class="col-3 col-s-12">
+        <div class="aside2">
+        <h2>Day 20<br>Quadruple Purple</h2>
+        </div>
+        <div class="aside">
+            <a href="Day20.html" target="_blank">
+                <img src="img/Day20.png" class="image" style="float:left;width:100%;object-fit:cover;">
+                <img src="img/launch.svg"  class="middle" style="object-fit:cover;padding:8px;">
+            </a>
+        </div>
+    </div>
+    
+
+</div>
+
+    
+
+    
+<!-- footer -->
+<div class="footer">
+  <p>© 2021 Dai Gu Jie All Rights Reserved</p>
+</div>
+
+</body>
+</html>

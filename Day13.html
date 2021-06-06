@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <title>Day13</title>
+    <meta charset="UTF-8">
+    <script language="javascript" type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.min.js"></script>
+<!--
+    <script language="javascript" type="text/javascript" src="sketch.js"></script>
+    <script language="javascript" type="text/javascript" src="particle.js"></script>
+-->
+    <link rel="icon" href="img/Day13.png" type="image/gif" sizes="16x16">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+<!--    <script src="sketch.js"></script>-->
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+html {
+    font-family: 'Gloria Hallelujah', cursive;
+    background-color: #cccccc;
+}
+
+.display {
+  background-color: #cccccc;
+  padding: 8px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+    
+    
+    .responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 30%;
+  border: none;
+}
+      </style>
+</head>
+
+<body>
+    
+      <div class="row">
+          <div class="col-2 col-s-12"></div>
+          <div class="col-8 col-s-12">
+              <main class="display">
+              </main>
+          </div>
+          <div class="col-2 col-s-12"></div>
+      </div>
+
+      <div class="row">
+          <div class="col-2 col-s-12"></div>
+          <div class="col-8 col-s-12">
+              <h2 style="text-align: center" >click anywhere on canvas</h2>
+          </div>
+          <div class="col-2 col-s-12"></div>
+      </div>
+
+<script>
+//sketch.js
+    
+    
+//let timer = 10;
+//let countDownSwitch = false;
+//function setup() { 
+//  createCanvas(400, 400);
+//} 
+//
+//function draw() { 
+//  background(220);
+//  textAlign(CENTER,CENTER);
+//  textSize(100);
+//  text(timer, width/2, height/2);
+//  if (frameCount % 60 == 0 && timer > 0){
+//  	timer--;
+//  }
+//  if (timer == 0){
+//  	textSize(20);
+//    text('click on canvas', width/2, height * 0.667);
+//  }
+//}
+
+let attractors = [];
+let particles = [];
+    
+function setup() {
+  createCanvas(600, 600);
+}
+  
+function mousePressed() {
+  attractors.push(createVector(mouseX, mouseY));
+
+}
+//function keyPressed() {
+//  if (keyCode === LEFT_ARROW) {
+//    attractors.position = (a-10, b);
+//  } else if (keyCode === RIGHT_ARROW) {
+//    attractors.position = (a+10, b);
+//  }
+//    else if (keyCode === UP_ARROW) {
+//    attractors.position = (a, b+10);
+//  }
+//    else if (keyCode === DOWN_ARROW) {
+//    attractors.position = (a, b-10);
+//  }
+//}  
+//    
+    
+function draw() {
+  background(46);
+  stroke(255);
+  strokeWeight(0);
+  particles.push(new Particle(-10, random(height)));
+  particles.push(new Particle(random(width), -10));
+  particles.push(new Particle(610, random(height)));
+  particles.push(new Particle(random(width), 610));
+
+  if (particles.length > 10) {
+    particles.splice(10, 2);
+  }
+
+  for (let i = 0; i < attractors.length; i++) {
+    fill(255,200,0);
+    ellipse(attractors[i].x, attractors[i].y, 24, 24);
+}
+  
+  for (let i = 0; i < particles.length; i++) {
+    var particle = particles[i];
+    for (let j = 0; j < attractors.length; j++) {
+      particle.attracted(attractors[j]);
+    }
+    particle.update();
+    particle.show();
+  }
+
+}
+
+//partical.js
+function Particle(x, y) {
+  this.pos = createVector(x, y);
+  this.prev = createVector(x, y);
+  this.vel = createVector(); //p5.Vector.random2D();
+  //this.vel = p5.Vector.random2D();
+  //this.vel.setMag(random(2, 5));
+  this.acc = createVector();
+
+  this.update = function() {
+    this.vel.add(this.acc);
+    this.vel.limit(6);
+    this.pos.add(this.vel);
+    this.acc.mult(0);
+  };
+
+  this.show = function() {
+    stroke(cos(x/300)*250, sin(y/200)*200, 200);
+    strokeWeight(2);
+    line(this.pos.x, this.pos.y, this.prev.x, this.prev.y);
+
+    this.prev.x = this.pos.x;
+    this.prev.y = this.pos.y;
+  };
+
+  this.attracted = function(target) {
+    // var dir = target - this.pos
+    var force = p5.Vector.sub(target, this.pos);
+    var d = force.mag();
+    d = constrain(d, 10, 20);
+    var G = 60;
+    var strength = G / (d*d);
+    force.setMag(strength);
+    if (d < 20) {
+      force.mult(-10);
+    }
+    this.acc.add(force);
+  };
+}
+
+   
+</script>
+      
+  </body>
+</html>

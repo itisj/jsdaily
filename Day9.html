@@ -1,0 +1,211 @@
+<html>
+  <head>
+    <title>Day9</title>
+    <link rel="icon" href="img/Day9.png" type="image/gif" sizes="16x16">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+<!--    <script src="sketch.js"></script>-->
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+html {
+    font-family: 'Gloria Hallelujah', cursive;
+    background-color: #cccccc;
+}
+
+.display {
+  background-color: #cccccc;
+  padding: 8px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+    
+    
+    .responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 30%;
+  border: none;
+}
+      </style>
+</head>
+
+<body>
+      <div class="row">
+          <div class="col-2 col-s-12"></div>
+          <div class="col-8 col-s-12">
+              <main class="display">
+              </main>
+          </div>
+          <div class="col-2 col-s-12"></div>
+      </div>
+
+
+
+<script>
+let system;
+
+function setup() {
+  createCanvas(600, 600);
+  system = new ParticleSystem(createVector(width / 2, 300));
+}
+
+function draw() {
+  background(46);
+  system.addParticle();
+  system.run();
+}
+
+// A simple Particle class
+let Particle = function(position) {
+  this.acceleration = createVector(0, 0);
+  this.velocity = createVector(random(2, -2), random(2, -2));
+  this.position = position.copy();
+  this.lifespan = 300;
+};
+
+Particle.prototype.run = function() {
+  this.update();
+  this.display();
+};
+
+// Method to update position
+Particle.prototype.update = function(){
+  this.velocity.add(this.acceleration);
+  this.position.add(this.velocity);
+  this.lifespan -= 6;
+};
+
+// Method to display
+Particle.prototype.display = function() {
+  // stroke(255, this.lifespan);
+  // strokeWeight(2);
+  // fill(this.position.y*12*sin(this.position.y/800), this.position.x*2*sin(this.position.y/800), this.position.y*2*sin(this.position.y/800), this.lifespan);
+  // ellipse(this.position.x, this.position.y, 20, 20);
+  
+  stroke(this.position.y*12*sin(this.position.y/800), this.position.x*2*sin(this.position.y/800), this.position.y*2*sin(this.position.y/800), this.lifespan);
+  strokeWeight(2);
+  noFill(127, this.lifespan);
+  ellipse(this.position.x, this.position.y, 300, 300);
+  
+  // stroke(180, 250, sin(this.position.y)*800, this.lifespan);
+  // strokeWeight(8);
+  // noFill(127, this.lifespan);
+  // ellipse(this.position.x, this.position.y, 300, 300);
+  
+  // stroke(180, 250, sin(this.position.y)*800, this.lifespan);
+  // strokeWeight(4);
+  // noFill(127, this.lifespan);
+  // ellipse(this.position.x-70, this.position.y, 100, 100);
+  
+//   stroke(0, this.lifespan);
+//   strokeWeight(2);
+//   noFill(255, 255, 255, this.lifespan);
+//   ellipse(this.position.x, this.position.y, 580, 580);
+  
+//   stroke(80, this.lifespan);
+//   strokeWeight(2);
+//   noFill(255, 255, 255, this.lifespan);
+//   ellipse(this.position.x, this.position.y, 620, 620);
+  
+//   stroke(160, this.lifespan);
+//   strokeWeight(3);
+//   noFill(255, 255, 255, this.lifespan);
+//   ellipse(this.position.x, this.position.y, 680, 680);
+  
+//   stroke(255, this.lifespan);
+//   strokeWeight(5);
+//   noFill(255, 255, 255, this.lifespan);
+//   ellipse(this.position.x, this.position.y, 770, 770);
+
+    
+//   stroke(255, this.lifespan);
+//   strokeWeight(5);
+//   noFill(255, 255, 255, this.lifespan);
+//   ellipse(this.position.x, this.position.y, 820, 820);
+  
+};
+
+// Is the particle still useful?
+Particle.prototype.isDead = function(){
+  return this.lifespan < 0;
+};
+
+let ParticleSystem = function(position) {
+  this.origin = position.copy();
+  this.particles = [];
+};
+
+ParticleSystem.prototype.addParticle = function() {
+  this.particles.push(new Particle(this.origin));
+};
+
+ParticleSystem.prototype.run = function() {
+  for (let i = this.particles.length-1; i >= 0; i--) {
+    let p = this.particles[i];
+    p.run();
+    if (p.isDead()) {
+      this.particles.splice(i, 1);
+    }
+  }
+};
+   
+</script>
+      
+  </body>
+</html>

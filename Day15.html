@@ -1,0 +1,198 @@
+<html>
+  <head>
+    <title>Day15</title>
+    <link rel="icon" href="img/Day15.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="img/Day13.png" type="image/gif" sizes="16x16">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.2.0/lib/p5.js"></script>
+<!--    <script src="sketch.js"></script>-->
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+  padding: 15px;
+}
+
+html {
+    font-family: 'Gloria Hallelujah', cursive;
+    background-color: #cccccc;
+}
+
+.display {
+  background-color: #cccccc;
+  padding: 8px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 14px;
+}
+
+
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  /* For tablets: */
+  .col-s-1 {width: 8.33%;}
+  .col-s-2 {width: 16.66%;}
+  .col-s-3 {width: 25%;}
+  .col-s-4 {width: 33.33%;}
+  .col-s-5 {width: 41.66%;}
+  .col-s-6 {width: 50%;}
+  .col-s-7 {width: 58.33%;}
+  .col-s-8 {width: 66.66%;}
+  .col-s-9 {width: 75%;}
+  .col-s-10 {width: 83.33%;}
+  .col-s-11 {width: 91.66%;}
+  .col-s-12 {width: 100%;}
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+    
+    
+    .responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 30%;
+  border: none;
+}
+      </style>
+</head>
+
+<body>
+      <div class="row">
+          <div class="col-2 col-s-12"></div>
+          <div class="col-8 col-s-12">
+              <main class="display">
+              </main>
+          </div>
+          <div class="col-2 col-s-12"></div>
+      </div>
+
+      <div class="row">
+        <div class="col-2 col-s-12"></div>
+        <div class="col-8 col-s-12">
+            <h2 style="text-align: center" >click on the void</h2>
+        </div>
+        <div class="col-2 col-s-12"></div>
+    </div>
+
+
+
+<script>
+
+let pixel = []
+
+function setup() {
+  createCanvas(600, 600);
+  // noLoop();
+  // for (let i = 0; i < random(600, 1200); i++) {
+  //   pixel.push(new Particle(random(-100, 200), random(0, 600)))
+  // }
+}
+
+function draw() {
+  background(0);
+  
+  for (let i = 0; i < pixel.length; i++) {
+    pixel[i].show();
+    pixel[i].update();
+  }
+  stroke(255)
+  strokeWeight(1)
+  line(301, -10, 301, 610);
+  
+  // for (let i = 100; i < 300; i++) {
+  // let r = random(200, 600);
+  // stroke(0, 255, 170);
+  // line(200, i, r, i);
+  // // point(r+200, i);
+  // }
+}
+
+function mousePressed() {
+  for (let i = 0; i < random(10, 20); i++) {
+    pixel.push(new Particle(random(-150, 0), random(0, 600)))
+  }
+}
+
+// function mouseReleased() {
+//   noLoop();
+// }
+
+class Particle {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.history = [];
+  }
+  
+  update() {
+    this.x = this.x + 10 + random(-20, 20);
+    this.y = this.y + random(-50, 50);
+    
+    let v = createVector(this.x, this.y);
+    
+    this.history.push(v);
+    
+    if (this.history.length > 50) {
+      this.history.splice(0, 1);
+    }
+  }
+  
+  show() {
+    beginShape();
+    for (let i = 0; i < this.history.length; i++) {
+      let pos = this.history[i];
+      stroke(cos(this.x/300)*300, sin(this.x*this.y/200)*500, sin(this.y/260)*600);
+      rect(pos.x, pos.y, 0.1);
+      // noise
+      // stroke(cos(this.x/300)*300, sin(this.x*this.y/200)*500, sin(this.y/260)*600);
+      // rect(random(width), random(height), 0.4);
+      // noise
+      // stroke(255, 28, 0);
+      // strokeWeight(1)
+      // point(pos.x-100, pos.y);
+      // stroke(0, 10, 255);
+      // strokeWeight(1)
+      // point(pos.y, pos.x-100);
+      endShape();
+    }
+  }
+}
+
+</script>
+      
+  </body>
+</html>
